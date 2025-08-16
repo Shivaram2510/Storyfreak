@@ -25,6 +25,15 @@ Preferred communication style: Simple, everyday language.
 - **Coverage**: Full development workflow, contribution guidelines, and accessibility standards
 - **Purpose**: Enable new developers to quickly understand and contribute to the project
 
+## Implemented Storybook Component Documentation
+- **Setup**: Storybook 8.6.14 with TypeScript support and CSF3 format for modern story writing
+- **TailwindCSS Integration**: Proper styling loads in Storybook preview with theme support
+- **Component Stories**: Comprehensive stories for InputField.tsx and DataTable.tsx covering all states, variants, and sizes
+- **Features**: Interactive controls, auto-generated docs, theme toggle (light/dark mode)
+- **Build Configuration**: Production-ready build generates to `storybook-static/` directory
+- **Deployment**: Configured for Vercel deployment with proper build settings
+- **Scripts**: Added `npm run storybook` (dev) and `npm run build-storybook` (production) to package.json
+
 # System Architecture
 
 ## Frontend Architecture
