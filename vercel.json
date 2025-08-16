@@ -2,26 +2,21 @@
   "version": 2,
   "builds": [
     {
-      "src": "server/index.ts",
+      "src": "package.json",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": [
-          "client/dist/**"
-        ]
-      }
-    },
-    {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
+        "maxLambdaSize": "50mb"
       }
     }
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/server/index.ts"
+    },
+    {
       "src": "/(.*)",
-      "dest": "server/index.ts"
+      "dest": "/server/index.ts"
     }
   ],
   "env": {
@@ -29,7 +24,6 @@
   },
   "installCommand": "npm install",
   "buildCommand": "npm run build",
-  "outputDirectory": "client/dist",
   "functions": {
     "server/index.ts": {
       "maxDuration": 30
