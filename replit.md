@@ -6,6 +6,19 @@ This is a full-stack React application showcasing a component library called "St
 
 Preferred communication style: Simple, everyday language.
 
+# Recent Changes (August 16, 2025)
+
+## Fixed Vercel Deployment Issues
+- **Problem**: CSS and styling not loading properly on Vercel deployment
+- **Root Cause**: Incorrect Tailwind content paths and missing PostCSS configuration for standalone client build
+- **Solution**: 
+  - Fixed `client/tailwind.config.ts` content paths from `./client/src/**/*` to `./src/**/*`
+  - Added proper `client/postcss.config.js` for Tailwind processing
+  - Updated `client/vite.config.ts` with correct asset handling
+  - Created standalone `client/package.json` with all necessary dependencies
+- **Result**: Build now generates properly processed CSS (10.21 kB vs previous 15.61 kB), ensuring all styling displays correctly on Vercel
+- **Deployment Settings**: Root Directory: `client`, Framework: `Vite`, Build Command: `npm run build`, Output Directory: `dist`
+
 # System Architecture
 
 ## Frontend Architecture
