@@ -1,4 +1,9 @@
 {
+  "buildCommand": "npm run build:client",
+  "outputDirectory": "dist/public",
+  "installCommand": "npm install",
+  "devCommand": "npm run dev:client",
+  "framework": null,
   "rewrites": [
     {
       "source": "/(.*)",
