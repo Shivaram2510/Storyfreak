@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "role": "Developer",
+    "status": "Active"
+  },
+  {
+    "id": "2",
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "role": "Designer",
+    "status": "Active"
+  },
+  {
+    "id": "3",
+    "name": "Mike Brown",
+    "email": "mike.brown@example.com",
+    "role": "Manager",
+    "status": "Pending"
+  },
+  {
+    "id": "4",
+    "name": "Sarah Wilson",
+    "email": "sarah.wilson@example.com",
+    "role": "Analyst",
+    "status": "Inactive"
+  },
+  {
+    "id": "5",
+    "name": "David Johnson",
+    "email": "david.johnson@example.com",
+    "role": "Developer",
+    "status": "Active"
+  }
+]

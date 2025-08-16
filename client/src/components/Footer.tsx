@@ -2,7 +2,7 @@ import { Box, Github } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-200 py-12">
+    <footer className="bg-background border-t border-border py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
@@ -10,23 +10,23 @@ export default function Footer() {
               <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center">
                 <Box className="text-white" size={20} />
               </div>
-              <h4 className="text-xl font-bold text-gray-900">Storyfreak</h4>
+              <h4 className="text-xl font-bold text-foreground">Storyfreak</h4>
             </div>
-            <p className="text-gray-600 mb-6 max-w-md">
+            <p className="text-muted-foreground mb-6 max-w-md">
               Build beautiful React applications with our comprehensive component library. 
               TypeScript-ready, accessible, and designed for modern web development.
             </p>
             <div className="flex space-x-4">
               <a 
                 href="#" 
-                className="text-gray-400 hover:text-primary-600 transition-colors duration-150"
+                className="text-muted-foreground hover:text-primary transition-colors duration-150"
                 data-testid="link-github"
               >
                 <Github size={24} />
               </a>
               <a 
                 href="#" 
-                className="text-gray-400 hover:text-primary-600 transition-colors duration-150"
+                className="text-muted-foreground hover:text-primary transition-colors duration-150"
                 data-testid="link-npm"
               >
                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
@@ -35,7 +35,7 @@ export default function Footer() {
               </a>
               <a 
                 href="#" 
-                className="text-gray-400 hover:text-primary-600 transition-colors duration-150"
+                className="text-muted-foreground hover:text-primary transition-colors duration-150"
                 data-testid="link-twitter"
               >
                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
@@ -46,12 +46,12 @@ export default function Footer() {
           </div>
           
           <div>
-            <h5 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Documentation</h5>
+            <h5 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Documentation</h5>
             <ul className="space-y-2">
               <li>
                 <a 
                   href="#" 
-                  className="text-gray-600 hover:text-primary-600 transition-colors duration-150"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-150"
                   data-testid="link-getting-started"
                 >
                   Getting Started
@@ -60,7 +60,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#" 
-                  className="text-gray-600 hover:text-primary-600 transition-colors duration-150"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-150"
                   data-testid="link-components"
                 >
                   Components
@@ -69,7 +69,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#" 
-                  className="text-gray-600 hover:text-primary-600 transition-colors duration-150"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-150"
                   data-testid="link-theming"
                 >
                   Theming
@@ -78,7 +78,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#" 
-                  className="text-gray-600 hover:text-primary-600 transition-colors duration-150"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-150"
                   data-testid="link-examples"
                 >
                   Examples
@@ -88,12 +88,12 @@ export default function Footer() {
           </div>
           
           <div>
-            <h5 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Support</h5>
+            <h5 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Support</h5>
             <ul className="space-y-2">
               <li>
                 <a 
                   href="#" 
-                  className="text-gray-600 hover:text-primary-600 transition-colors duration-150"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-150"
                   data-testid="link-help-center"
                 >
                   Help Center
@@ -102,7 +102,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#" 
-                  className="text-gray-600 hover:text-primary-600 transition-colors duration-150"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-150"
                   data-testid="link-community"
                 >
                   Community
@@ -111,7 +111,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#" 
-                  className="text-gray-600 hover:text-primary-600 transition-colors duration-150"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-150"
                   data-testid="link-contact"
                 >
                   Contact Us
@@ -120,7 +120,7 @@ export default function Footer() {
               <li>
                 <a 
                   href="#" 
-                  className="text-gray-600 hover:text-primary-600 transition-colors duration-150"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-150"
                   data-testid="link-report-issues"
                 >
                   Report Issues
@@ -130,21 +130,21 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="border-t border-gray-200 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-gray-500 text-sm">
+        <div className="border-t border-border mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
+          <p className="text-muted-foreground text-sm">
             © 2024 Storyfreak. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 sm:mt-0">
             <a 
               href="#" 
-              className="text-gray-500 hover:text-primary-600 text-sm transition-colors duration-150"
+              className="text-muted-foreground hover:text-primary text-sm transition-colors duration-150"
               data-testid="link-privacy"
             >
               Privacy Policy
             </a>
             <a 
               href="#" 
-              className="text-gray-500 hover:text-primary-600 text-sm transition-colors duration-150"
+              className="text-muted-foreground hover:text-primary text-sm transition-colors duration-150"
               data-testid="link-terms"
             >
               Terms of Service

@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Edit, Table2 } from "lucide-react";
 import InputField from "./InputField";
 import DataTable from "./DataTable";
-import { sampleUsers, type User } from "@/data/mockData";
+import { type User } from "@/types";
 import { type Column } from "@/types";
+import { getUsers, saveUsers, getInputValues, saveInputValues } from "@/utils/localStorage";
 
 export default function ComponentShowcase() {
   const [inputValues, setInputValues] = useState({
@@ -21,9 +22,27 @@ export default function ComponentShowcase() {
     clearable: ""
   });
 
-  const [tableData, setTableData] = useState<User[]>(sampleUsers);
+  const [tableData, setTableData] = useState<User[]>([]);
   const [selectedRows, setSelectedRows] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Load data from localStorage on component mount
+  useEffect(() => {
+    const users = getUsers();
+    const savedInputValues = getInputValues();
+    
+    setTableData(users);
+    setInputValues(prev => ({ ...prev, ...savedInputValues }));
+  }, []);
+
+  // Save input values to localStorage when they change
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      saveInputValues(inputValues);
+    }, 500); // Debounce to avoid excessive localStorage writes
+    
+    return () => clearTimeout(timeoutId);
+  }, [inputValues]);
 
   const columns: Column<User>[] = [
     {
@@ -65,34 +84,55 @@ export default function ComponentShowcase() {
   };
 
   const resetTableData = () => {
-    setTableData(sampleUsers);
+    const users = getUsers();
+    setTableData(users);
+  };
+
+  const handleRowDelete = (index: number) => {
+    const userToDelete = tableData[index];
+    if (userToDelete) {
+      const updatedUsers = tableData.filter((_, i) => i !== index);
+      setTableData(updatedUsers);
+      saveUsers(updatedUsers);
+    }
+  };
+
+  const handleRowEdit = (index: number) => {
+    // For demo purposes, we'll just update the status
+    const updatedUsers = [...tableData];
+    if (updatedUsers[index]) {
+      const currentStatus = updatedUsers[index].status;
+      updatedUsers[index].status = currentStatus === 'Active' ? 'Inactive' : 'Active';
+      setTableData(updatedUsers);
+      saveUsers(updatedUsers);
+    }
   };
 
   return (
     <section id="components" className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h3 className="text-3xl font-bold text-gray-900 mb-4">Component Library</h3>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h3 className="text-3xl font-bold text-foreground mb-4">Component Library</h3>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Explore our collection of flexible, accessible, and beautifully designed components.
           </p>
         </div>
 
         {/* InputField Component Section */}
         <div className="mb-20">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
-              <h4 className="text-xl font-semibold text-gray-900 flex items-center">
-                <Edit className="text-primary-600 mr-3" size={24} />
+          <div className="bg-card rounded-xl shadow-sm border border-border overflow-hidden">
+            <div className="bg-muted px-6 py-4 border-b border-border">
+              <h4 className="text-xl font-semibold text-card-foreground flex items-center">
+                <Edit className="text-primary mr-3" size={24} />
                 InputField Component
               </h4>
-              <p className="text-gray-600 mt-1">Flexible input component with validation states and multiple variants</p>
+              <p className="text-muted-foreground mt-1">Flexible input component with validation states and multiple variants</p>
             </div>
             
             <div className="p-6">
               {/* Variants Row */}
               <div className="mb-8">
-                <h5 className="text-lg font-medium text-gray-900 mb-4">Variants</h5>
+                <h5 className="text-lg font-medium text-foreground mb-4">Variants</h5>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-3">
                     <InputField
@@ -129,7 +169,7 @@ export default function ComponentShowcase() {
 
               {/* Sizes Row */}
               <div className="mb-8">
-                <h5 className="text-lg font-medium text-gray-900 mb-4">Sizes</h5>
+                <h5 className="text-lg font-medium text-foreground mb-4">Sizes</h5>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-2">
                     <InputField
@@ -163,7 +203,7 @@ export default function ComponentShowcase() {
 
               {/* States Row */}
               <div className="mb-8">
-                <h5 className="text-lg font-medium text-gray-900 mb-4">States</h5>
+                <h5 className="text-lg font-medium text-foreground mb-4">States</h5>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <div className="space-y-2">
                     <InputField
@@ -206,7 +246,7 @@ export default function ComponentShowcase() {
 
               {/* Special Features */}
               <div>
-                <h5 className="text-lg font-medium text-gray-900 mb-4">Special Features</h5>
+                <h5 className="text-lg font-medium text-foreground mb-4">Special Features</h5>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <InputField
@@ -236,13 +276,13 @@ export default function ComponentShowcase() {
 
         {/* DataTable Component Section */}
         <div>
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
-              <h4 className="text-xl font-semibold text-gray-900 flex items-center">
-                <Table2 className="text-primary-600 mr-3" size={24} />
+          <div className="bg-card rounded-xl shadow-sm border border-border overflow-hidden">
+            <div className="bg-muted px-6 py-4 border-b border-border">
+              <h4 className="text-xl font-semibold text-card-foreground flex items-center">
+                <Table2 className="text-primary mr-3" size={24} />
                 DataTable Component
               </h4>
-              <p className="text-gray-600 mt-1">Powerful data table with sorting, selection, and loading states</p>
+              <p className="text-muted-foreground mt-1">Powerful data table with sorting, selection, and loading states</p>
             </div>
             
             <div className="p-6">
@@ -251,21 +291,21 @@ export default function ComponentShowcase() {
                 <div className="flex items-center space-x-4">
                   <button 
                     onClick={toggleLoading}
-                    className="px-3 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-150"
+                    className="px-3 py-2 text-sm border border-border rounded-lg hover:bg-accent transition-colors duration-150"
                     data-testid="button-toggle-loading"
                   >
                     {isLoading ? 'Stop Loading' : 'Show Loading'}
                   </button>
                   <button 
                     onClick={clearTableData}
-                    className="px-3 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-150"
+                    className="px-3 py-2 text-sm border border-border rounded-lg hover:bg-accent transition-colors duration-150"
                     data-testid="button-clear-data"
                   >
                     Show Empty State
                   </button>
                   <button 
                     onClick={resetTableData}
-                    className="px-3 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-150"
+                    className="px-3 py-2 text-sm border border-border rounded-lg hover:bg-accent transition-colors duration-150"
                     data-testid="button-reset-data"
                   >
                     Reset Data
@@ -280,6 +320,8 @@ export default function ComponentShowcase() {
                 loading={isLoading}
                 selectable={true}
                 onRowSelect={setSelectedRows}
+                onRowEdit={handleRowEdit}
+                onRowDelete={handleRowDelete}
               />
             </div>
           </div>
